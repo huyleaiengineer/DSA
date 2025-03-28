@@ -15,7 +15,9 @@ struct ListNode {
 
 
 /// List of functions
-
+bool isEmpty(ListNode *head);
+void ListInsertHead(ListNode *&head, int val);
+void ListRemoveHead(ListNode *&head);
 
 /// Check list empty
 
@@ -23,6 +25,17 @@ bool isEmpty(ListNode *head)
 {
     return head->next == nullptr;
 }
+
+/// ListSearch
+ListNode *ListSearch(ListNode *head, int key)
+{
+    ListNode *x = new ListNode();
+    for (x = head; !isEmpty(x); x = x->next)
+        if (x->val == key)
+            return x;
+    return x;
+}
+
 
 /// Insert head
 void ListInsertHead(ListNode *&head, int val)
@@ -33,7 +46,7 @@ void ListInsertHead(ListNode *&head, int val)
 }
 
 /// Remove head
-void ListInsertTail(ListNode *&head)
+void ListRemoveHead(ListNode *&head)
 {
     if (!isEmpty(head))
         head = head->next;
@@ -41,7 +54,7 @@ void ListInsertTail(ListNode *&head)
         cout << "Can not remove any more because of empty list!\n";
 }
 
-
+/// List Traverse
 void ListTreverse( ListNode *L)
 {
     for (ListNode *head = L; head->next != nullptr; head = head->next)
@@ -50,6 +63,10 @@ void ListTreverse( ListNode *L)
     }
     cout << '\n';
 }
+
+/// ListDelete or ListInsert at any position --> use ListSearch to identify what node to be inserted/deleted
+
+
 
 int main()
 {
@@ -67,18 +84,26 @@ int main()
     else
         cout << "Empty List\n";
 
-    ListInsertTail(L);
-    ListTreverse (L);
-    ListInsertTail(L);
-    ListTreverse (L);
-    ListInsertTail(L);
-    ListTreverse (L);
-    ListInsertTail(L);
-    ListTreverse (L);
-    ListInsertTail(L);
-    ListTreverse (L);
-    ListInsertTail(L);
-    ListTreverse (L);
+
+
+    ListNode *x1 = ListSearch(L, 8);
+    if (!isEmpty(x1))
+        cout << "Existing node have key is " << x1->val << '\n';
+    else
+         cout << "Not Existing node have key \n";
+
+    ListNode *x2 = ListSearch(L, 10);
+     if (!isEmpty(x2))
+        cout << "Existing node have key is " << x2->val << '\n';
+    else
+         cout << "Not Existing node have key \n";
+
+
+    for (int i = 1; i <= 5; ++i)
+    {
+        ListRemoveHead(L);
+        ListTreverse(L);
+    }
 
 
     return 0;
